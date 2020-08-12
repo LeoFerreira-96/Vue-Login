@@ -1,11 +1,10 @@
 <template>
   <v-app>
     <v-toolbar app>
-      <v-toolbar-title class="headline text-uppercase">
-        <span>SALES TIME</span>
+      <v-toolbar-title class="headline text-uppercase" >
+        <span>Sales Time</span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
-      <span class="mr-2">Pagina de Login</span>
     </v-toolbar>
 
     <v-content>
@@ -27,3 +26,8 @@ export default {
   }
 };
 </script>
+<style>
+span{
+  color:#3a0ca3;
+}
+</style>
