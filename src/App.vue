@@ -5,25 +5,20 @@
         <span>SALES TIME</span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
-        <span class="mr-2">Pagina de Login</span>
+      <span class="mr-2">Pagina de Login</span>
     </v-toolbar>
 
     <v-content>
-      <FormLogin />
-      <Button />
+      <router-view></router-view>
     </v-content>
   </v-app>
 </template>
 
 <script>
-import Button from "./components/Button";
-import FormLogin from "./components/FormLogin"
 
 export default {
   name: "App",
   components: {
-    Button,
-    FormLogin
   },
   data() {
     return {

@@ -1,7 +1,5 @@
 <template>
-  <div class="text-xs-center">
-    <v-btn outline color="indigo">LOGIN</v-btn>
-  </div>
+  <v-btn outline color="indigo">LOGIN</v-btn>
 </template>
 
 <script></script>
