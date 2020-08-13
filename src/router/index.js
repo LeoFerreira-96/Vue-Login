@@ -1,5 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
+
 import Login from "../views/Login";
 import Oportunity from "../views/Oportunity";
 
@@ -7,13 +8,24 @@ Vue.use(VueRouter);
 
 const routes = [
   {
-    path: "/",
+    path: "",
+    redirect:"/login",
+  },
+  {
+    path: "/login",
     name: "Login",
+    meta: {
+      title: "Página Login"
+    },
     component: Login
   },
   {
     path: "/Oportunity",
     name: "Oportunity",
+    meta: {
+      isAuth: true,
+      title: "Página Oportunity"
+    },
     component: Oportunity
   }
 ];

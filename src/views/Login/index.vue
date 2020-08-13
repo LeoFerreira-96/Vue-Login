@@ -10,17 +10,19 @@
             v-model="user"
             :rules="userRules"
             label="USUARIO"
+            type="text"
             required
           ></v-text-field>
           <v-text-field
             v-model="password"
             :rules="passwordRules"
             label="SENHA"
+            type="password"
             required
           ></v-text-field>
           <v-layout align-center justify-center row fill-height>
               <router-link  style="text-decoration: none" to='/Oportunity'>
-                <v-btn outline color="#3a0ca3">Login</v-btn>
+                <v-btn type="button" outline color="#3a0ca3" @click="log(e)" >Login</v-btn>
               </router-link>
           </v-layout>
         </v-form>
@@ -40,7 +42,12 @@
       passwordRules: [
         v => !!v || 'Senha é Obrigatória'
       ]
-    })
+    }),
+    methods: () => {
+      const log = e => {
+        console.log(this.user, this.password, e)
+      }
+    }
   }
 </script>
 <style>
