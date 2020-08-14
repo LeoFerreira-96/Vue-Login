@@ -5,6 +5,7 @@
         <h1>Oportunity</h1>
       </v-layout>
       <v-layout justify-center row>
+        <!-- tabela para receber os dados da Api -->
         <v-data-table
         :headers="headers"
         :items="desserts"

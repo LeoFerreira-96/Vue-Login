@@ -11,19 +11,17 @@
             :rules="userRules"
             label="USUARIO"
             type="text"
-            required
           ></v-text-field>
           <v-text-field
             v-model="password"
             :rules="passwordRules"
             label="SENHA"
             type="password"
-            required
           ></v-text-field>
           <v-layout align-center justify-center row fill-height>
-              <router-link  style="text-decoration: none" to='/Oportunity'>
-                <v-btn type="button" outline color="#3a0ca3" @click="log(e)" >Login</v-btn>
-              </router-link>
+              <!-- <router-link  style="text-decoration: none" to='/Oportunity'> -->
+                <v-btn @click="submit" outline color="#3a0ca3">Login</v-btn>
+              <!-- </router-link> -->
           </v-layout>
         </v-form>
       </v-layout>
@@ -31,21 +29,29 @@
   </div>
 </template>
 <script>
+import Auth from '../../services/auth'
   export default {
     data: () => ({
+      // validação input Usuario
       valid: false,
       user: '',
       userRules: [
         v => !!v || 'Usuario é Obrigatório'
       ],
+      // validação input Senha
       password: '',
       passwordRules: [
         v => !!v || 'Senha é Obrigatória'
       ]
     }),
-    methods: () => {
-      const log = e => {
-        console.log(this.user, this.password, e)
+    methods: {
+      async submit(){
+        console.log(this.user, this.password)
+        const authData = await Auth.login(this.user, this.password)
+        console.log('AuthData:', authData)
+        // const variable = await action
+        
+        this.$router.push('/oportunity')
       }
     }
   }
