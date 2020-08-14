@@ -15,12 +15,12 @@ const httpLink = createHttpLink({
     uri: 'https://api.supercrm.ezdevs.com.br/'
 })
 
-export const apollo = new ApolloClient({
-    link: httpLink,
-    cache: new InMemoryCache()
-})
-
 export {
     AUTH_TOKEN,
     onLogin
 }
+
+export const apollo = new ApolloClient({
+    link: httpLink,
+    cache: new InMemoryCache()
+})

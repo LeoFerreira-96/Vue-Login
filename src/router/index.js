@@ -2,7 +2,7 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 
 import Login from "../views/Login";
-import Oportunity from "../views/Oportunity";
+import Activity from "../views/Activity";
 
 Vue.use(VueRouter);
 
@@ -20,13 +20,13 @@ const routes = [
     component: Login
   },
   {
-    path: "/Oportunity",
-    name: "Oportunity",
+    path: "/activity",
+    name: "Activity",
     meta: {
       isAuth: true,
-      title: "Página Oportunity"
+      title: "Página Atividades"
     },
-    component: Oportunity
+    component: Activity
   }
 ];
 

@@ -2,7 +2,7 @@
   <div>
     <v-content>
       <v-layout align-center justify-center row fill-height>
-        <h1>Oportunity</h1>
+        <h1>Activity</h1>
       </v-layout>
       <v-layout justify-center row>
         <!-- tabela para receber os dados da Api -->
@@ -10,7 +10,7 @@
         :headers="headers"
         :items="desserts"
         :loading="true"
-        class="tableOportunity"
+        class="tableActivity"
       >
         <v-progress-linear v-slot:progress color=":#3a0ca3" indeterminate></v-progress-linear>
         <template v-slot:items="props">
@@ -38,7 +38,7 @@ export default {
 </script>
 <style>
 
-.tableOportunity{
+.tableActivity{
     width: 80%;
     height: auto;
 }

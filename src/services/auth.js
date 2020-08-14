@@ -1,7 +1,7 @@
-import apollo, {onLogin} from '../plugins/apollo'
+import {apollo, onLogin} from '../plugins/apollo'
 import gql from 'graphql-tag'
 
-const login = async variables => {
+const login = async (user, password) => {
     const response = await apollo.query({
         query: gql`
         query Login($user: String!, $password: String!){
@@ -11,20 +11,18 @@ const login = async variables => {
                 user {
                     name
                     email
-                }
-                firstLogin
-                role {
-                    key
-                    permissions {
+                    firstLogin
+                    role {
                         key
-                    }
+                        permissions {
+                            key
+                        }
+                }
                 }
             }
         }`,
-        variables: {
-            user: variables.user,
-            password: variables.password
-        },
+            email: user,
+            password: password,
     })
     const {login} = response.data
     await onLogin(apollo, login.token)

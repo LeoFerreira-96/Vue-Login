@@ -19,7 +19,7 @@
             type="password"
           ></v-text-field>
           <v-layout align-center justify-center row fill-height>
-              <!-- <router-link  style="text-decoration: none" to='/Oportunity'> -->
+              <!-- <router-link  style="text-decoration: none" to='/activity'> -->
                 <v-btn @click="submit" outline color="#3a0ca3">Login</v-btn>
               <!-- </router-link> -->
           </v-layout>
@@ -51,7 +51,7 @@ import Auth from '../../services/auth'
         console.log('AuthData:', authData)
         // const variable = await action
         
-        this.$router.push('/oportunity')
+        this.$router.push('/activity')
       }
     }
   }
