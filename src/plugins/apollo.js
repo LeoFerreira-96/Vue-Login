@@ -7,8 +7,6 @@ const AUTH_TOKEN = 'apollo-token'
 const onLogin = async (apollo, token) => {
     if (typeof window.localStorage !== 'undefined' && token) {
         window.localStorage.setItem(AUTH_TOKEN, token)
-    }else{
-        console.log('nao esta vazia', window.localStorage)
     }
 }
 const httpLink = createHttpLink({
