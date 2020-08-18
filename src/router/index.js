@@ -9,31 +9,31 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: "",
-    redirect:"/login",
+    redirect: "/login",
   },
   {
     path: "/login",
     name: "Login",
     meta: {
-      title: "Página Login"
+      title: "Página Login",
     },
-    component: Login
+    component: Login,
   },
   {
     path: "/activity",
     name: "Activity",
     meta: {
       isAuth: true,
-      title: "Página Atividades"
+      title: "Página Atividades",
     },
-    component: Activity
-  }
+    component: Activity,
+  },
 ];
 
 const router = new VueRouter({
   mode: "history",
   base: process.env.BASE_URL,
-  routes
+  routes,
 });
 
 export default router;

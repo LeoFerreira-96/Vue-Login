@@ -1,24 +1,22 @@
-import { ApolloClient } from 'apollo-client'
-import { createHttpLink } from 'apollo-link-http'
-import { InMemoryCache } from 'apollo-cache-inmemory'
+import { ApolloClient } from "apollo-client";
+import { createHttpLink } from "apollo-link-http";
+import { InMemoryCache } from "apollo-cache-inmemory";
 
-const AUTH_TOKEN = 'apollo-token'
+const AUTH_TOKEN = "apollo-token";
 
 const onLogin = async (apollo, token) => {
-    if (typeof window.localStorage !== 'undefined' && token) {
-        window.localStorage.setItem(AUTH_TOKEN, token)
-    }
-}
-const httpLink = createHttpLink({
-    uri: 'https://api.supercrm.ezdevs.com.br/'
-})
+  if (typeof window.localStorage !== "undefined" && token) {
+    window.localStorage.setItem(AUTH_TOKEN, token);
+  }
+};
 
-export {
-    AUTH_TOKEN,
-    onLogin
-}
+const httpLink = createHttpLink({
+  uri: "https://api.supercrm.ezdevs.com.br/",
+});
+
+export { AUTH_TOKEN, onLogin };
 
 export const apollo = new ApolloClient({
-    link: httpLink,
-    cache: new InMemoryCache()
-})
+  link: httpLink,
+  cache: new InMemoryCache(),
+});
