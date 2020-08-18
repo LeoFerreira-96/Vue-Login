@@ -27,8 +27,9 @@ const login = async (variable) => {
       password: variable.password,
     },
   });
-  const { login } = response.data;
-  onLogin(apollo, login.token);
+  const _token = response.data.Login.token;
+  // console.log(response.data.Login.token);
+  await onLogin(apollo, _token);
   return login;
 };
 
@@ -37,19 +38,7 @@ const activity = async () => {
     query: gql`
       query Activity {
         activity {
-          token
-          refreshToken
-          user {
-            name
-            email
-            firstLogin
-            role {
-              key
-              permissions {
-                key
-              }
-            }
-          }
+          //
         }
       }
     `,

@@ -3,21 +3,11 @@
     <v-content>
       <v-layout align-center justify-center row fill-height>
         <h1>Faça seu Login</h1>
-        <v-progress-circular
-          v-show="onLoading"
-          indeterminate
-          color="#3a0ca3"
-          width="2"
-        ></v-progress-circular>
+        <v-progress-circular v-show="onLoading" indeterminate color="#3a0ca3" width="2"></v-progress-circular>
       </v-layout>
       <v-layout align-center justify-center row fill-height>
         <v-form v-model="user.valid">
-          <v-text-field
-            v-model="user.email"
-            :rules="user.emailRules"
-            label="EMAIL"
-            type="text"
-          ></v-text-field>
+          <v-text-field v-model="user.email" :rules="user.emailRules" label="EMAIL" type="text"></v-text-field>
           <v-text-field
             v-model="user.password"
             :rules="user.passwordRules"
@@ -43,26 +33,27 @@ export default {
       // validação input Usuario
       valid: false,
       email: "",
-      emailRules: [(v) => !!v || "Email é Obrigatório"],
+      emailRules: [v => !!v || "Email é Obrigatório"],
       // validação input Senha
       password: "",
-      passwordRules: [(v) => !!v || "Senha é Obrigatória"],
-    },
+      passwordRules: [v => !!v || "Senha é Obrigatória"]
+    }
   }),
   methods: {
     async submit() {
       this.onLoading = true;
       try {
-        await new Promise((resolve) => setTimeout(resolve, 3000));
+        await new Promise(resolve => setTimeout(resolve, 2000));
+        console.log("User: ", this.user);
         await Auth.login(this.user);
         this.$router.push("/activity");
       } catch (error) {
-        console.log(error);
+        console.log(error, "deu algum erro");
       } finally {
         this.isLoading = false;
       }
-    },
-  },
+    }
+  }
 };
 </script>
 <style>
