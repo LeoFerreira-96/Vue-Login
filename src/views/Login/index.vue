@@ -1,6 +1,10 @@
 <template>
   <div>
     <v-content>
+      <v-snackbar v-model="snackbar" top>
+        {{ error }}
+        <v-btn color="Red" flat @click="snackbar = false">Close</v-btn>
+      </v-snackbar>
       <v-layout align-center justify-center row fill-height>
         <h1>Faça seu Login</h1>
         <v-progress-circular v-show="onLoading" indeterminate color="#3a0ca3" width="2"></v-progress-circular>
@@ -28,6 +32,8 @@
 import Auth from "../../services/auth";
 export default {
   data: () => ({
+    snackbar: false,
+    error: undefined,
     onLoading: false,
     user: {
       // validação input Usuario
@@ -43,14 +49,13 @@ export default {
     async submit() {
       this.onLoading = true;
       try {
-        await new Promise(resolve => setTimeout(resolve, 2000));
-        console.log("User: ", this.user);
         await Auth.login(this.user);
         this.$router.push("/activity");
       } catch (error) {
-        console.log(error, "deu algum erro");
+        this.error = "Por Favor verifique suas Credênciais";
+        this.snackbar = true;
       } finally {
-        this.isLoading = false;
+        this.onLoading = false;
       }
     }
   }
