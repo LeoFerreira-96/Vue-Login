@@ -33,6 +33,20 @@ const login = async (variable) => {
   return login;
 };
 
+const user = async (options = {}) => {
+  const response = await apollo.query({
+    query: gql`
+      query User {
+        user {
+          //
+        }
+      }
+    `,
+    ...options,
+  });
+  return response.data.user;
+};
+
 const activity = async () => {
   const response = await apollo.query({
     query: gql`
@@ -49,4 +63,5 @@ const activity = async () => {
 export default {
   login,
   activity,
+  user,
 };
