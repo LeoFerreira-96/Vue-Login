@@ -1,6 +1,10 @@
 <template>
   <div>
     <v-content>
+      <v-snackbar v-model="snackbar" top>
+        {{ error }}
+        <v-btn color="Red" flat @click="snackbar = false">Close</v-btn>
+      </v-snackbar>
       <v-layout align-center justify-center row fill-height>
         <h1>Activity</h1>
       </v-layout>
@@ -12,7 +16,7 @@
         :loading="true"
         class="tableActivity"
       >
-        <v-progress-linear v-slot:progress color=":#3a0ca3" indeterminate></v-progress-linear>
+        <v-progress-linear v-show="onLoading" color="#3a0ca3" indeterminate></v-progress-linear>
         <template v-slot:items="props">
           <td>{{ props.item.name }}</td>
           <td class="text-xs-right">{{ props.item }}</td>
@@ -32,8 +36,28 @@
   </div>
 </template>
 <script>
+import Auth from "../../services/auth";
 export default {
-  
+  data: () => ({
+    snackbar: false,
+    error: undefined,
+    onLoading: false,
+    ActivityTableInput:{
+      //setar valores padrão por enquanto.
+    }
+  }),
+  methods: {
+  async onload() {
+      this.onLoading = true;
+      try {
+        await Auth.activity(this.ActivityTableInput);
+      } catch (error) {
+        this.snackbar = true;
+      } finally {
+        this.onLoading = false;
+      }
+    }
+  }
 }
 </script>
 <style>

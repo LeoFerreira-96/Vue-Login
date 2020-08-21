@@ -28,7 +28,6 @@ const login = async (variable) => {
     },
   });
   const _token = response.data.Login.token;
-  // console.log(response.data.Login.token);
   await onLogin(apollo, _token);
   return login;
 };
@@ -50,14 +49,42 @@ const user = async (options = {}) => {
 const activity = async () => {
   const response = await apollo.query({
     query: gql`
-      query Activity {
-        activity {
-          //
+      query ($ActivityTableInput: ActivityTableInput!) {
+      activitiesByCompanyId(input: $ActivityTableInput) {
+        data {
+          id
+          type
+          subject
+          note
+          datetime
+          duration
+          situation
+          user {
+            id
+            name
+          }
+          organization {
+            id
+            name
+          }
+          people {
+            id
+            name
+          }
+          opportunity {
+            id
+            title
+          }
+          googleEventId
         }
+        total
+        page
+        perPage
       }
+    }
     `,
   });
-  return response.data.activity;
+  return response.data.activitiesByCompanyId;
 };
 
 export default {
@@ -65,3 +92,5 @@ export default {
   activity,
   user,
 };
+
+
