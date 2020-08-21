@@ -36,14 +36,15 @@ const user = async (options = {}) => {
   const response = await apollo.query({
     query: gql`
       query User {
-        user {
-          //
+        currentUser {
+          id
+          name
         }
       }
     `,
     ...options,
   });
-  return response.data.user;
+  return response.data.currentUser;
 };
 
 const activity = async () => {

@@ -39,24 +39,33 @@ const router = new VueRouter({
 });
 
 router.beforeEach(async (to, from, next) => {
+  const token = window.localStorage.getItem(AUTH_TOKEN);
   if (to.matched.some((route) => route.meta.isAuth)) {
-    const token = window.localStorage.getItem(AUTH_TOKEN);
     const loginRoute = {
       path: "/login",
     };
-    const nextRoute = {
-      path: "/activity",
-    };
     if (token) {
       try {
-        await Auth.user({ fetchPolicy: "network-only" });
-        return next(nextRoute);
+        const user = await Auth.user({ fetchPolicy: "network-only" });
+        console.log(user)
+        return next();
       } catch (error) {
-        console.log("erro no uto login");
+        console.log("erro no auto login", error);
         return next(loginRoute);
       }
     }
     return next(loginRoute);
+  }
+  if(token){
+    const activityRoute = {
+      path:"/activity"
+    };
+    try {
+      await Auth.user({ fetchPolicy: "network-only"});
+      return next(activityRoute);
+    } catch (error){
+      return next();
+    }
   }
   next();
 });
