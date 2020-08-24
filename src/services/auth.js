@@ -47,7 +47,7 @@ const user = async (options = {}) => {
   return response.data.currentUser;
 };
 
-const activity = async () => {
+const activity = async (variable) => {
   const response = await apollo.query({
     query: gql`
       query ($ActivityTableInput: ActivityTableInput!) {
@@ -84,6 +84,9 @@ const activity = async () => {
       }
     }
     `,
+    variables: {
+      activitiesByCompanyId: variable.ActivityTableInput,
+    },
   });
   return response.data.activitiesByCompanyId;
 };
