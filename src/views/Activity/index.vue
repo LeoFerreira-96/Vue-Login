@@ -11,24 +11,24 @@
       <v-layout justify-center row>
         <!-- tabela para receber os dados da Api -->
         <v-data-table
-        :headers="table.id"
+        :headers="headers"
         :items="table"
         :loading="true"
         class="tableActivity"
       >
         <v-progress-linear color="#3a0ca3" indeterminate></v-progress-linear>
         <template v-slot:items="props">
-          <td>{{ props.type }}</td>
-          <td class="text-xs-right">{{ props.subject }}</td>
+          <td>{{ props.item.type }}</td>
+          <td class="text-xs-right">{{ props.item.subject }}</td>
           
         </template>
       </v-data-table>
       </v-layout>
       <v-layout align-center justify-center row fill-height>
-          <router-link  style="text-decoration: none" to='/'>
+          <!-- <router-link  style="text-decoration: none" to='/'>
             <v-btn outline color="#3a0ca3">VOLTAR</v-btn>
-          </router-link>
-            <router-link  style="text-decoration: none" to="logout">
+          </router-link> -->
+          <router-link  style="text-decoration: none" to="logout">
             <v-btn outline color="#3a0ca3" @click="logout">SAIR</v-btn>
           </router-link>
       </v-layout>
@@ -43,15 +43,13 @@ export default {
     snackbar: false,
     error: undefined,
     onLoading: false,
-    ActivityTableInput:{
-      descending: false,
-      limit: 100,
-      page: 1,
-      period: null,
-      situation: 1,
-      sortBy: "datetime"
-    },
-    table: {}
+    table: [],
+    headers: [
+          { text: 'Tipo', value: 'type' },
+          { text: 'Assunto', value: 'subject' },
+          { text: 'Data', value: 'note' },
+          { text: 'Hora', value: 'datetime' },
+          { text: 'Duração', value: 'duration' }]
   }),
   async created() {
     this.table = await Auth.activity()
@@ -63,7 +61,8 @@ export default {
   },
   async tableActivity() {
       try {
-        await Auth.activity(this.ActivityTableInput);
+        await Auth.activity(this.activityTableInput);
+        console.log(this.activityTableInput)
       } catch (error) {
         this.snackbar = true;
       }
